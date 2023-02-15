@@ -1,0 +1,42 @@
+.container__quick{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 3rem;
+
+}
+.container__quick form{
+  max-width: 900px;
+  display: flex;
+  padding: 1rem;
+}
+.container__quick h2{
+  text-transform: uppercase;
+  font-size: 24px;
+}
+.container__quick input:first-child{
+  background-color: #F5F5F5;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  border: 1px solid #4472ED;
+  margin-right: 1rem
+}
+.container__quick input:last-child{
+  background-color: #4472ED;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  font-size: 15px;
+  transition: background-color 0.3s ease-in-out;
+  border-radius: 4px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.container__quick input:last-child:hover{
+  background-color: #1F2024;
+}
+
