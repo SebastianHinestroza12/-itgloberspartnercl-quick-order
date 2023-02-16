@@ -18,7 +18,7 @@ export const QuickOrder = () => {
   const [addToCart] = useMutation(UPDATE_CART)
 
 
-  useEffect(() => {
+useEffect(() => {
     if (product) {
       let skuId = parseInt(inputText)
       addToCart({
@@ -37,11 +37,7 @@ export const QuickOrder = () => {
           window.location.href = "/checkout"
         })
     }
-    else {
-      alert('no exite el producto')
-    }
-
-    }, [product, search])
+}, [product, search])
 
   const handleChange = (e: any) => {
         setInputText(e.target.value)
