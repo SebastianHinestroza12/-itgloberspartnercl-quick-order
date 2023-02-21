@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState, FormEvent, useEffect } from "react";
 import { useMutation, useLazyQuery } from 'react-apollo';
 //@ts-ignore
 import { useCssHandles } from "vtex.css-handles";
@@ -11,12 +11,11 @@ import './index.css'
 export const QuickOrder = () => {
   const [inputText, setInputText] = useState("");
   const [search, setSearch] = useState("")
-
+  console.log(search)
   const handles = useCssHandles(CSS_HANDLES)
 
   const [getProductData, { data: product }] = useLazyQuery(GET_PRODUCT)
   const [addToCart] = useMutation(UPDATE_CART)
-
 
 useEffect(() => {
     if (product) {
@@ -39,8 +38,14 @@ useEffect(() => {
     }
 }, [product, search])
 
-  const handleChange = (e: any) => {
-        setInputText(e.target.value)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+     // Validar que solo se ingresen caracteres numéricos
+    const regex = /^[0-9\b]+$/;
+    if (regex.test(value) || value === '') {
+      setInputText(value);
+    }
   }
 
   const addProductToCart = () => {
@@ -51,21 +56,21 @@ useEffect(() => {
         })
     }
 
-  const searchProduct = (e: any) => {
+  const searchProduct = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inputText) {
       Toast()
     }
-      else {
+    else {
         setSearch(inputText)
         addProductToCart()
-        }
+    }
   }
   return (
     <div className={handles.container__quick}>
         <h2>Compra rápida en sony</h2>
         <form onSubmit={searchProduct}>
-            <input id="sku" type="text" placeholder="Ingresa el número de SKU" onChange={ handleChange}></input>
+            <input value={inputText} id="sku" type="text" placeholder="Ingresa el número de SKU" onChange={ handleChange}></input>
             <input type="submit" value="AÑADIR AL CARRITO"/>
         </form>
     </div>
